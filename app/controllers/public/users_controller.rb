@@ -15,7 +15,11 @@ class Public::UsersController < ApplicationController
     @tweets_all    = @user.tweets.all
     @total_weights = @tweets_all.group(:meat_id).sum(:once_weight)
     @user_achievement = @user.user_achievements.find_by(on_display: true)
-    @achievement = @user_achievement.achievement
+    if @user_achievement.present?
+      @achievement = @user_achievement.achievement.title
+    else
+      @achievement = "称号未設定"
+    end
   end
   # user情報編集画面
   def edit

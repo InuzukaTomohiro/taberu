@@ -1,12 +1,15 @@
 <h2><%= @user.nick_name %>さんの称号一覧</h2>
 
-<table class="table active">
+<table class="table active text-center">
   <thead>
     <tr>
       <th>獲得年月日</th>
       <th>お肉の種類</th>
       <th>称号名</th>
       <th>称号条件</th>
+      <% if @user == current_user %>
+        <th colspan="2">称号設定</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -17,12 +20,12 @@
         <td><%= user_achievement.achievement.title %></td>
         <td><%= user_achievement.achievement.introduction %></td>
         <% if @user == current_user %>
-          <td>
-            <div id="achievement_error_<%= user_achievement.id %>"></div>
-            <div id="achievement_btn_<%= user_achievement.id %>">
-              <%= render "public/user_achievements/btn", user: @user, user_achievement: user_achievement %>
-            </div>
-          </td>
+        <td>
+          <div id="achievement_error_<%= user_achievement.id %>"></div>
+          <div id="achievement_btn_<%= user_achievement.id %>">
+            <%= render "public/user_achievements/btn", user: @user, user_achievement: user_achievement %>
+          </div>
+        </td>
         <% end %>
       </tr>
     <% end %>
